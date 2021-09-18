@@ -77,3 +77,15 @@ variable "security_group_id" {
   type        = string
   default     = ""
 }
+
+variable "create" {
+  description = "Whether to create instance. If false, you can specify an existing instance by setting 'instance_id'."
+  type        = bool
+  default     = true
+}
+
+variable "instance_id" {
+  description = "The instance_id used to launch several kafka. If set, the 'create' will be ignored."
+  type        = string
+  default     = ""
+}
