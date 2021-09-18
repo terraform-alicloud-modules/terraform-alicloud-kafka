@@ -1,5 +1,5 @@
 output "this_kafka_instance_id" {
-  value = alicloud_alikafka_instance.default.id
+  value = var.instance_id != "" ? var.instance_id : concat(alicloud_alikafka_instance.default.*.id, [""])[0]
 }
 
 output "this_kafka_consumer_group_id" {
@@ -11,5 +11,5 @@ output "this_zone_id" {
 }
 
 output "this_kafka_instance_name" {
-  value = alicloud_alikafka_instance.default.name
+  value = var.instance_id != "" ? var.kafka_instance_name : concat(alicloud_alikafka_instance.default.*.name, [""])[0]
 }

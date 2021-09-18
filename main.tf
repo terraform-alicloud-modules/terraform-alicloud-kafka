@@ -1,4 +1,5 @@
 resource "alicloud_alikafka_instance" "default" {
+  count          = var.instance_id != "" ? 0 : var.create ? 1 : 0
   name           = var.kafka_instance_name
   topic_quota    = var.topic_quota
   disk_type      = var.disk_type
@@ -11,11 +12,11 @@ resource "alicloud_alikafka_instance" "default" {
 
 resource "alicloud_alikafka_consumer_group" "default" {
   consumer_id = var.consumer_id
-  instance_id = alicloud_alikafka_instance.default.id
+  instance_id = var.instance_id != "" ? var.instance_id : concat(alicloud_alikafka_instance.default.*.id, [""])[0]
 }
 
 resource "alicloud_alikafka_topic" "default" {
-  instance_id   = alicloud_alikafka_instance.default.id
+  instance_id   = var.instance_id != "" ? var.instance_id : concat(alicloud_alikafka_instance.default.*.id, [""])[0]
   topic         = var.topic
   local_topic   = var.local_topic
   compact_topic = var.compact_topic
