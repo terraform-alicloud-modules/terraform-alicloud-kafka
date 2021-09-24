@@ -28,7 +28,7 @@ terraform-alicloud-kafka
 
 ```hcl
 module "example" {
-  source     = "terraform-alicloud-modules/terraform-alicloud-kafka"
+  source     = "terraform-alicloud-modules/kafka/alicloud"
   name       = "tf-test-kafka"
   vswitch_id = "1234"
 }
